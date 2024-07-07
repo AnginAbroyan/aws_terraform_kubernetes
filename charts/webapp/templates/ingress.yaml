@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: {{ .Values.ingress.paths.path }}
+            pathType: {{ .Values.ingress.paths.pathType }}
+            backend:
+              service:
+                name: {{ $.Release.Name }}
+                port:
+                  number: {{ .Values.port }}

@@ -1,0 +1,29 @@
+replicaCount: 2
+
+image:
+  repository: changeme
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  target_port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+  paths:
+    path: "/"
+    pathType: Prefix
+  awsLoadBalancerType: "nlb"
+
+secrets:
+  dbUsername: changeme
+  dbPassword: changeme
+  dbHost: changeme
+
+namespace: "deployment"
+port: 80
+

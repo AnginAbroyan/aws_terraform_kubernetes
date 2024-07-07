@@ -1,0 +1,4 @@
+apiVersion: v2
+name: webapp
+description: A Helm chart for brainscale-app
+version: 0.1.0
